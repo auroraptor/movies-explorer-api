@@ -1,0 +1,19 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "🔙🔚 часть приложения",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auroraptor/movies-explorer-api.git"
+  },
+  "author": "Aurora",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/auroraptor/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/auroraptor/movies-explorer-api#readme"
+}
