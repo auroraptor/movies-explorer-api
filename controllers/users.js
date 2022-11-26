@@ -80,7 +80,7 @@ module.exports.login = async (req, res, next) => {
       maxAge: 3600000 * 24 * 7,
       httpOnly: true,
       sameSite: true,
-    }).send({ message: 'Этот токен безопасно сохранен в httpOnly куку' }).end();
+    }).send({ message: 'set 🍪' }).end();
   } catch (error) {
     next(error);
   }
