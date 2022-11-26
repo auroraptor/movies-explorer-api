@@ -26,10 +26,10 @@ module.exports.removeMovie = async (req, res, next) => {
   try {
     const movie = await Movie.findById(req.params.movieId);
     if (movie === null) {
-      next(new HTTP404Error(`Карточка с id ${req.params.movieId} не найдена`));
+      next(new HTTP404Error(`Фильм с id ${req.params.movieId} не найден`));
       return;
     } if (movie.owner.toHexString() !== req.user._id) {
-      next(new HTTP403Error('Можно удалять только свои фильсы'));
+      next(new HTTP403Error('Можно удалять только свои фильмы'));
       return;
     }
     await movie.delete();
