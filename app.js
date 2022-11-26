@@ -11,7 +11,7 @@ const routes = require('./routes');
 // const cors = require('./middlewares/cors');
 // const { logNow, logError } = require('./utils/log');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const { errorHandler } = require('./middlewares/errorHandler');
+const { errorHandler } = require('./middlewares/errorHandler');
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(requestLogger);
 app.use(helmet());
 // app.use(cors);
 
-mongoose.connect('mongodb://localhost:27017/mestodb', { autoIndex: true })
+mongoose.connect('mongodb://localhost:27017/movies-explorer', { autoIndex: true })
   .then(() => console.log('Connected to the server'))
   .catch((err) => console.log(err));
 
@@ -41,7 +41,7 @@ app.use(routes);
 
 app.use(errorLogger);
 app.use(errors());
-// app.use(errorHandler);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`App server listening on port ${PORT}`);
