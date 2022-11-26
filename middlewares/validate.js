@@ -25,7 +25,7 @@ module.exports.validateUserId = celebrate({
 module.exports.validateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
-    email: Joi.string().required().email(),
+    email: Joi.string().email(),
   }),
 });
 
@@ -40,6 +40,7 @@ module.exports.validateMovie = celebrate({
     thumbnail: Joi.string().required().pattern(url),
     nameRU: Joi.string(),
     nameEN: Joi.string(),
+    movieId: Joi.string().pattern(/[a-f0-9]{24,24}/).length(24),
   }),
 });
 
