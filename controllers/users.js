@@ -2,10 +2,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-// const { HttpStatusCode } = require('../utils/HttpStatusCode');
-// const { HTTP401Error } = require('../errors/HTTP401Error');
-// const { HTTP409Error } = require('../errors/HTTP409Error');
-// const { HTTP404Error } = require('../errors/HTTP404Error');
+const { HttpStatusCode } = require('../utils/HttpStatusCode');
+const { HTTP401Error } = require('../errors/HTTP401Error');
+const { HTTP409Error } = require('../errors/HTTP409Error');
+const { HTTP404Error } = require('../errors/HTTP404Error');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
