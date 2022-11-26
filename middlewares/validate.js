@@ -27,3 +27,23 @@ module.exports.validateUser = celebrate({
     email: Joi.string().required().email(),
   }),
 });
+
+module.exports.validateMovie = celebrate({
+  body: Joi.object().keys({
+    country: Joi.string(),
+    director: Joi.string(),
+    duration: Joi.number(),
+    year: Joi.string(),
+    description: Joi.string(),
+    trailerLink: Joi.string().required().pattern(url),
+    thumbnail: Joi.string().required().pattern(url),
+    nameRU: Joi.string(),
+    nameEN: Joi.string(),
+  }),
+});
+
+module.exports.validateMovieId = celebrate({
+  params: Joi.object().keys({
+    movieId: Joi.string().pattern(/[a-f0-9]{24,24}/).length(24),
+  }),
+});
