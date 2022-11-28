@@ -16,7 +16,6 @@ router.post(`${baseURL}signout`, (req, res) => {
   res.clearCookie('jwt').end();
 });
 router.use('*', (req, res, next) => {
-  console.log('baseURL: ', req.baseUrl);
   next(new HTTP404Error(`По адресу ${req.baseUrl} ничего не нашлось`));
 });
 
