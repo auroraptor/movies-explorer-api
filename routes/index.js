@@ -5,13 +5,14 @@ const auth = require('../middlewares/auth');
 const { validateSignIn, validateAuth } = require('../middlewares/validate');
 const { signin, createUser } = require('../controllers/users');
 const { HTTP404Error } = require('../errors/HTTP404Error');
+const baseURL = require('../utils/baseUrl');
 
-router.post('/signup', validateSignIn, createUser);
-router.post('/signin', validateAuth, signin);
-router.use('/', auth);
-router.use('/users', userRouter);
-router.use('/movies', movieRouter);
-router.post('/signout', (req, res) => {
+router.post(`${baseURL}signup`, validateSignIn, createUser);
+router.post(`${baseURL}signin`, validateAuth, signin);
+router.use(`${baseURL}`, auth);
+router.use(`${baseURL}users`, userRouter);
+router.use(`${baseURL}movies`, movieRouter);
+router.post(`${baseURL}signout`, (req, res) => {
   res.clearCookie('jwt').end();
 });
 router.use('*', (req, res, next) => {
