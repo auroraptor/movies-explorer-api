@@ -71,6 +71,10 @@ module.exports.updateUser = async (req, res, next) => {
     });
     res.send(user);
   } catch (error) {
+    if (error.name === 'MongoServerError' || error.message.includes('11000')) {
+      next(new HTTP409Error(`${req.body.email} уже зарегестрирован`));
+      return;
+    }
     next(error);
   }
 };
