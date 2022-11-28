@@ -43,5 +43,5 @@ app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`App server listening on port ${PORT}`);
+  logNow(`App server listening on port ${PORT}`);
 });
