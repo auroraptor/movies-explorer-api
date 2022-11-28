@@ -10,6 +10,7 @@ const routes = require('./routes');
 // const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { errorHandler } = require('./middlewares/errorHandler');
+const { logNow, logError } = require('./utils/log');
 
 const app = express();
 
@@ -23,9 +24,8 @@ app.use(helmet());
 const { PORT = 3000, DB = 'mongodb://localhost:27017/movies-explorer' } = process.env;
 
 mongoose.connect(DB, { autoIndex: true })
-  .then(() => console.log('Connected to the server'))
-  .catch((err) => console.log(err));
-
+  .then(() => logNow('Connected to the server'))
+  .catch((err) => logError(err));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,

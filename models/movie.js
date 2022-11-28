@@ -3,37 +3,37 @@ const validator = require('validator');
 
 const movieSchema = new mongoose.Schema({
   country: {
-    type: String,
+    type: mongoose.Schema.Types.String,
     required: true,
   },
   director: {
-    type: String,
+    type: mongoose.Schema.Types.String,
     required: true,
   },
   duration: {
-    type: Number,
+    type: mongoose.Schema.Types.Number,
     required: true,
   },
   year: {
-    type: String,
+    type: mongoose.Schema.Types.String,
     required: true,
   },
   description: {
-    type: String,
+    type: mongoose.Schema.Types.String,
     required: true,
   },
   trailerLink: {
-    type: String,
+    type: mongoose.Schema.Types.String,
     required: true,
     validate: {
       validator(link) {
-        return validator.isURL(link) === true;
+        return validator.isURL(link);
       },
       message: 'Is not a valid URL',
     },
   },
   thumbnail: {
-    type: String,
+    type: mongoose.Schema.Types.String,
     required: true,
     validate: {
       validator(link) {
@@ -44,21 +44,28 @@ const movieSchema = new mongoose.Schema({
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'User',
     required: true,
   },
   movieId: {
-    type: String,
+    type: mongoose.Schema.Types.String,
     required: true,
   },
   nameRU: {
-    type: String,
+    type: mongoose.Schema.Types.String,
     required: true,
   },
   nameEN: {
-    type: String,
+    type: mongoose.Schema.Types.String,
     required: true,
   },
 });
 
-module.exports = mongoose.model('movie', movieSchema);
+movieSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  // eslint-disable-next-line no-param-reassign
+  transform(doc, ret) { delete ret._id; },
+});
+
+module.exports = mongoose.model('Movie', movieSchema);
