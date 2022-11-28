@@ -31,15 +31,15 @@ module.exports.validateUser = celebrate({
 
 module.exports.validateMovie = celebrate({
   body: Joi.object().keys({
-    country: Joi.string(),
-    director: Joi.string(),
-    duration: Joi.number(),
-    year: Joi.string(),
-    description: Joi.string(),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.string().required(),
+    description: Joi.string().required(),
     trailerLink: Joi.string().required().pattern(url),
     thumbnail: Joi.string().required().pattern(url),
-    nameRU: Joi.string(),
-    nameEN: Joi.string(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
     movieId: Joi.string().pattern(/[a-f0-9]{24,24}/).length(24),
   }),
 });
