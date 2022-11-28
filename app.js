@@ -20,7 +20,7 @@ app.use(requestLogger);
 app.use(helmet());
 app.use(limiter);
 
-const { PORT = 3000, DB = 'mongodb://localhost:27017/moviesdb-dev' } = process.env;
+const { PORT, DB } = process.env;
 
 mongoose.connect(DB, { autoIndex: true })
   .then(() => logNow('Connected to the server'))
