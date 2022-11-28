@@ -15,7 +15,7 @@ module.exports.getMovies = async (req, res, next) => {
 
 module.exports.createMovie = async (req, res, next) => {
   try {
-    const movie = await Movie.create({ ...req.body, owner: req.user._id });
+    const movie = await Movie.create({ ...req.body, owner: req.user.id });
     res.status(HttpStatusCode.OK).send(movie);
   } catch (error) {
     next(error);
@@ -28,7 +28,7 @@ module.exports.removeMovie = async (req, res, next) => {
     if (movie === null) {
       next(new HTTP404Error(`Фильм с id ${req.params.movieId} не найден`));
       return;
-    } if (movie.owner.toHexString() !== req.user._id) {
+    } if (movie.owner.toHexString() !== req.user.id) {
       next(new HTTP403Error('Можно удалять только свои фильмы'));
       return;
     }

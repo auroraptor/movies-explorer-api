@@ -1,7 +1,7 @@
 const { celebrate, Joi } = require('celebrate');
 const { url } = require('../utils/regexps');
 
-module.exports.validateUserBody = celebrate({
+module.exports.validateSignIn = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
