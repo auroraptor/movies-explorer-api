@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 const mongoose = require('mongoose');
 const validator = require('validator');
 
@@ -64,11 +63,5 @@ const movieSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
-
-movieSchema.set('toJSON', {
-  virtuals: true,
-  versionKey: false,
-  transform(doc, ret) { delete ret._id; },
-});
 
 module.exports = mongoose.model('Movie', movieSchema);

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 const mongoose = require('mongoose');
 const validator = require('validator');
 
@@ -24,15 +23,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
     select: false,
-  },
-});
-
-userSchema.set('toJSON', {
-  virtuals: true,
-  versionKey: false,
-  transform(doc, ret) {
-    delete ret._id;
-    delete ret.password;
   },
 });
 
