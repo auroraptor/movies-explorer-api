@@ -23,6 +23,16 @@ const movieSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
       required: true,
     },
+    image: {
+      type: mongoose.Schema.Types.String,
+      required: true,
+      validate: {
+        validator(link) {
+          return validator.isURL(link);
+        },
+        message: 'Is not a valid URL',
+      },
+    },
     trailerLink: {
       type: mongoose.Schema.Types.String,
       required: true,
