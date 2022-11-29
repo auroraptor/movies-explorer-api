@@ -49,7 +49,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
     },
     movieId: {
-      type: mongoose.Schema.Types.String,
+      type: mongoose.Schema.Types.Number,
       required: true,
     },
     nameRU: {
@@ -61,7 +61,7 @@ const movieSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true },
+  { versionKey: false },
 );
 
 module.exports = mongoose.model('Movie', movieSchema);

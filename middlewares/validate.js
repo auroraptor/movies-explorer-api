@@ -40,12 +40,12 @@ module.exports.validateMovie = celebrate({
     thumbnail: Joi.string().required().pattern(url),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-    movieId: Joi.string().pattern(/[a-f0-9]{24,24}/).length(24),
+    movieId: Joi.number().required().unsafe().integer(),
   }),
 });
 
 module.exports.validateMovieId = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().pattern(/[a-f0-9]{24,24}/).length(24),
+    _id: Joi.string().pattern(/[a-f0-9]{24,24}/).length(24),
   }),
 });
