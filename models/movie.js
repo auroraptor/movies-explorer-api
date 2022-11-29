@@ -74,4 +74,11 @@ const movieSchema = new mongoose.Schema(
   { versionKey: false },
 );
 
+movieSchema.set('toJSON', {
+  virtuals: true,
+  transform(doc, ret) {
+    delete ret._id;
+  },
+});
+
 module.exports = mongoose.model('Movie', movieSchema);

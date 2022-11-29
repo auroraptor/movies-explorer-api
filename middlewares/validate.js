@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const { url } = require('../utils/regexps');
+const { isURL } = require('validator');
 
 module.exports.validateSignIn = celebrate({
   body: Joi.object().keys({
@@ -24,8 +24,8 @@ module.exports.validateUserId = celebrate({
 
 module.exports.validateUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    email: Joi.string().email(),
+    name: Joi.string().required().min(2).max(30),
+    email: Joi.string().required().email(),
   }),
 });
 
@@ -36,9 +36,9 @@ module.exports.validateMovie = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().pattern(url),
-    trailerLink: Joi.string().required().pattern(url),
-    thumbnail: Joi.string().required().pattern(url),
+    image: Joi.string().required().custom((link, helpers) => (isURL(link) ? link : helpers.message('image contains an invalid URL'))),
+    trailerLink: Joi.string().required().custom((link, helpers) => (isURL(link) ? link : helpers.message('trailerLink contains an invalid URL'))),
+    thumbnail: Joi.string().required().custom((link, helpers) => (isURL(link) ? link : helpers.message('thumbnail contains an invalid URL'))),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     movieId: Joi.number().required().unsafe().integer(),
@@ -47,6 +47,6 @@ module.exports.validateMovie = celebrate({
 
 module.exports.validateMovieId = celebrate({
   params: Joi.object().keys({
-    _id: Joi.string().pattern(/[a-f0-9]{24,24}/).length(24),
+    id: Joi.string().pattern(/[a-f0-9]{24,24}/).length(24),
   }),
 });
