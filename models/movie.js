@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
+const { isURL } = require('validator');
 
 const movieSchema = new mongoose.Schema(
   {
@@ -27,30 +27,24 @@ const movieSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
       required: true,
       validate: {
-        validator(link) {
-          return validator.isURL(link);
-        },
-        message: 'Is not a valid URL',
+        validator: (link) => isURL(link),
+        message: 'Is not a valid image link',
       },
     },
     trailerLink: {
       type: mongoose.Schema.Types.String,
       required: true,
       validate: {
-        validator(link) {
-          return validator.isURL(link);
-        },
-        message: 'Is not a valid URL',
+        validator: (link) => isURL(link),
+        message: 'Is not a valid trailer link',
       },
     },
     thumbnail: {
       type: mongoose.Schema.Types.String,
       required: true,
       validate: {
-        validator(link) {
-          return validator.isURL(link);
-        },
-        message: 'Is not a valid URL',
+        validator: (link) => isURL(link),
+        message: 'Is not a valid thumbnail link',
       },
     },
     owner: {
