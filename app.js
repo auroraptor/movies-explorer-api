@@ -20,7 +20,7 @@ app.use(requestLogger);
 app.use(helmet());
 app.use(limiter);
 
-const { PORT = 3000, DB = 'mongodb://localhost:27017/moviesdb-dev', NODE_ENV } = process.env;
+const { PORT = 3000, DB = 'mongodb://localhost:27017/moviesdb', NODE_ENV } = process.env;
 
 mongoose.connect(DB, { autoIndex: true })
   .then(() => logNow(`[${NODE_ENV ? 'PROD' : 'DEV'} MODE]: Connected to the ${DB}`))
