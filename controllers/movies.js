@@ -6,7 +6,8 @@ const { HTTP403Error } = require('../errors/HTTP403Error');
 
 module.exports.getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({});
+    const filter = { owner: req.user.id };
+    const movies = await Movie.find(filter);
     res.status(HttpStatusCode.OK).send(movies);
   } catch (error) {
     next(error);
