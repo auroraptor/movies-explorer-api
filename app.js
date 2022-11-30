@@ -26,7 +26,7 @@ mongoose.connect(DB, { autoIndex: true })
   .then(() => logNow(`[${NODE_ENV ? 'PROD' : 'DEV'} MODE]: Connected to the ${DB}`))
   .catch((err) => logError(err));
 
-app.use(routes);
+app.use('/api', routes);
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
