@@ -15,7 +15,7 @@ module.exports.createUser = async (req, res, next) => {
     const user = await User.create({ ...req.body, password: hash });
     res.status(HttpStatusCode.OK).send(user);
   } catch (error) {
-    if (error.message.includes('11000')) {
+    if (error.name === 'MongoServerError' || error.code === 11000) {
       next(new HTTP409Error(`${req.body.email} уже зарегестрирован`));
       return;
     }
@@ -71,7 +71,7 @@ module.exports.updateUser = async (req, res, next) => {
     });
     res.send(user);
   } catch (error) {
-    if (error.message.includes('11000')) {
+    if (error.name === 'MongoServerError' || error.code === 11000) {
       next(new HTTP409Error(`${req.body.email} уже зарегестрирован`));
       return;
     }

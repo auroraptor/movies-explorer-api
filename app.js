@@ -20,10 +20,10 @@ app.use(requestLogger);
 app.use(helmet());
 app.use(limiter);
 
-const { PORT = 3000, DB = 'mongodb://localhost:27017/moviesdb-dev' } = process.env;
+const { PORT = 3000, DB = 'mongodb://localhost:27017/moviesdb-dev', NODE_ENV } = process.env;
 
 mongoose.connect(DB, { autoIndex: true })
-  .then(() => logNow(`Connected to the ${DB}`))
+  .then(() => logNow(`[${NODE_ENV ? 'PROD' : 'DEV'} MODE]: Connected to the ${DB}`))
   .catch((err) => logError(err));
 
 app.use(routes);
@@ -31,6 +31,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  logNow(`App server listening on port ${PORT}`);
-});
+app.listen(PORT, () => logNow(`App listening on port ${PORT}`));
