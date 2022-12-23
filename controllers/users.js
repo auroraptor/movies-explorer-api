@@ -40,11 +40,14 @@ module.exports.signin = async (req, res, next) => {
 
     const token = jwt.sign({ id: user.id }, NODE_ENV === 'production' ? JWT_SECRET : '🔐', { expiresIn: '7d' });
 
+    console.log('USER: ', user);
+
     res.status(HttpStatusCode.OK).cookie('jwt', token, {
       maxAge: 3600000 * 24 * 7,
       httpOnly: true,
-      sameSite: true,
-    }).end();
+      secure: true,
+      sameSite: 'None',
+    }).send({ message: 'Этот токен безопасно сохранен в httpOnly куку' }).end();
   } catch (error) {
     next(error);
   }
