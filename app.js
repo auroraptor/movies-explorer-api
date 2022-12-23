@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const limiter = require('./middlewares/limiter');
+const cors = require('./middlewares/cors');
 const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(requestLogger);
 app.use(helmet());
+app.use(cors);
 app.use(limiter);
 
 const { PORT = 3000, DB = 'mongodb://localhost:27017/moviesdb', NODE_ENV } = process.env;
