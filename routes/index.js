@@ -12,7 +12,7 @@ router.use('/', auth);
 router.use('/users', userRouter);
 router.use('/movies', movieRouter);
 router.post('/signout', (req, res) => {
-  res.clearCookie('jwt', { secure: true, sameSite: 'None' }).send({ message: '🍪 cleared' }).end();
+  res.clearCookie('jwt', { secure: true, sameSite: 'None' }).end();
 });
 router.use('*', (req, res, next) => {
   next(new HTTP404Error(`По адресу ${req.baseUrl} ничего не нашлось`));
