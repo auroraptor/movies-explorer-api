@@ -45,7 +45,7 @@ module.exports.signin = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: 'None',
-    }).send({ message: 'Этот токен безопасно сохранен в httpOnly куку' }).end();
+    }).end();
   } catch (error) {
     next(error);
   }
