@@ -34,7 +34,7 @@ module.exports.removeMovie = async (req, res, next) => {
       return;
     }
     await movie.delete();
-    res.status(HttpStatusCode.OK).send({ message: `Фильм с id ${req.params.id} удалён` });
+    res.status(HttpStatusCode.OK).send(movie);
   } catch (error) {
     next(error);
   }
